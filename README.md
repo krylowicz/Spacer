@@ -1,34 +1,8 @@
-# spacer
+# Spacer App
+This app uses NASA image API to fetch images and display them after passing search query.
 
-## Project setup
+## How it works?
 ```
-yarn install
+yarn
+yarn serve
 ```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
