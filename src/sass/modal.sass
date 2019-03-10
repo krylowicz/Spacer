@@ -6,6 +6,7 @@
   top: 0
   left: 0
 
+  
   @media (min-width: 1024px)
     max-width: 70%
     height: 70%
@@ -46,12 +47,13 @@
     display: flex
     justify-content: center
     align-items: center
-    padding: 50px
+    padding: 25px
     height: 100%
     flex-direction: column
 
     @media (min-width: 1024px)
       flex-direction: row
+      padding: 50px
 
       .photo
         min-width: 50%
@@ -67,6 +69,12 @@
         width: auto
         height: 100%
 
+      @media (max-width: 768px)
+        img
+          width: 100%
+          height: auto
+          margin-top: 25%
+
     .description
       color: #333333
       width: 40%
@@ -74,6 +82,7 @@
       @media (max-width: 768px)
         text-align: center
         width: 100%
+        height: auto
 
       p
         width: 100%
