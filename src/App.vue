@@ -1,8 +1,19 @@
 <template>
-  <div class="wrapper">
-    <HeroImage />
-    <Claim />
-    <SearchInput v-model="searchValue" @input="handleInput" />
+<!-- eslint-disable max-len -->
+  <div :class="[{ flexStart: step === 1 }, 'wrapper']">
+    <transition name="slide">
+      <img src="./assets/logo.svg" class="logo" v-if="step === 1">
+    </transition>
+    <transition name="fade">
+      <HeroImage v-if="step === 0" />
+    </transition>
+    <Claim v-if="step === 0" />
+    <SearchInput v-model="searchValue" @input="handleInput" :dark="step === 1"/>
+    <div class="results" v-if="results && !loading && step === 1">
+      <Item v-for="item in results" :item="item" :key="item.data[0].nasa_id" @click.native="handleModalOpen(item)" />
+    </div>
+    <div class="loader" v-if="step === 1 && loading" />
+    <Modal v-if="modalOpen" :item="modalItem" @closeModal="modalOpen = false" />
   </div>
 </template>
 
@@ -12,6 +23,8 @@ import debounce from 'lodash.debounce';
 import Claim from '@/components/Claim.vue';
 import SearchInput from '@/components/SearchInput.vue';
 import HeroImage from '@/components/HeroImage.vue';
+import Item from '@/components/Item.vue';
+import Modal from '@/components/Modal.vue';
 
 const API = 'https://images-api.nasa.gov';
 
@@ -21,20 +34,32 @@ export default {
     Claim,
     SearchInput,
     HeroImage,
+    Item,
+    Modal,
   },
   data() {
     return {
+      modalOpen: false,
+      modalItem: null,
+      loading: false,
+      step: 0,
       searchValue: '',
       results: [],
     };
   },
   methods: {
+    handleModalOpen(item) {
+      this.modalOpen = true;
+      this.modalItem = item;
+    },
     // eslint-disable-next-line
     handleInput: debounce(function() {
-      console.log(this.searchValue);
+      this.loading = true;
       axios.get(`${API}/search?q=${this.searchValue}&media_type=image`)
         .then((response) => {
           this.results = response.data.collection.items;
+          this.loading = false;
+          this.step = 1;
         })
         .catch((error) => {
           console.log(error);
