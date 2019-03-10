@@ -1,4 +1,5 @@
 <template>
+<!-- eslint-disable max-len -->
   <input id="search" name="search" placeholder=" e.g. moon" :value="value" @input="handleChange" :class="{ dark }" />
 </template>
 
