@@ -1,5 +1,5 @@
 <template>
-  <input id="search" name="search" :value="value" @input="handleChange" />
+  <input id="search" name="search" :value="value" @input="handleChange" :class="{ dark }" />
 </template>
 
 <script>
@@ -9,6 +9,10 @@ export default {
     value: {
       type: String,
       required: true,
+    },
+    dark: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
