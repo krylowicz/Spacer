@@ -1,5 +1,5 @@
 <template>
-  <input id="search" name="search" :value="value" @input="handleChange" :class="{ dark }" />
+  <input id="search" name="search" placeholder=" e.g. moon" :value="value" @input="handleChange" :class="{ dark }" />
 </template>
 
 <script>
