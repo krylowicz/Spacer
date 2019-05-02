@@ -52,7 +52,7 @@ export default {
       this.modalOpen = true;
       this.modalItem = item;
     },
-    // eslint-disable-next-line
+    // eslint-disable-next-line 
     handleInput: debounce(function() {
       this.loading = true;
       axios.get(`${API}/search?q=${this.searchValue}&media_type=image`)
